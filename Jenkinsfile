@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('write log') {
       steps {
-        s3Upload 'static-jenkins'
+        echo 'success'
       }
     }
 
