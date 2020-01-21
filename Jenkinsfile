@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('deploy to S3') {
+      steps {
+        s3Upload 'static-jenkins'
+      }
+    }
+
   }
 }
