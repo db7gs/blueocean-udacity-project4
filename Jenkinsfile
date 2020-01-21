@@ -1,17 +1,13 @@
 pipeline {
-  agent any
-  stages {
-    stage('test') {
-      steps {
-        echo 'test1'
-      }
+    agent any
+    stages {
+       stage('Upload to AWS') {
+             steps {
+                 withAWS(region:'us-east-2',credentials:'aws-static') {
+                 sh 'echo "Uploading content with AWS creds"'
+                     s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'test1', bucket:'static-jenkins')
+                 }
+             }
+        }
     }
-
-    stage('deploy to S3') {
-      steps {
-        s3Upload 'static-jenkins'
-      }
-    }
-
-  }
 }
